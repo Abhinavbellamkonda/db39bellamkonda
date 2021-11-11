@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1= title
-  - const Bath_essentials = ['Bath_tub_Type','Bath_Towel_Type','Cost']
-  - let results;
+  //- let Bath_essentials = ['Bath_tub_Type','Bath_Towel_Type','Cost']
+  - let Bath_essentials = results;
   script.
     function buy(x){
       alert('Purchased Item: ' + x)
