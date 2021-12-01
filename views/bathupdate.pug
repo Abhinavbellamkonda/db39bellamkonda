@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+        - let bathid = toShow._id
+        - let bath_type = toShow.bath_type
+        - let bath_towel_type = toShow.bath_towel_type
+        - let cost = toShow.cost
+      
+        div.row(class='mb-2')
+          div.mr-1 ID is
+          div #{bathid}
+        - let actionid = "/resource/resource/bath/" + bathid
+        form(id='bathForm', action= actionid, method="PUT")
+          div.form-group
+              label.bathAttr(for='bath_type') bath_type
+              input#bath_type(type='text', name='bath_type', value= bath_type )
+          div.form-group
+              label.bathAttr(for='bath_towel_type') bath_towel_type 
+              input#bath_towel_type(type='text', name='bath_towel_type', value= bath_towel_type )
+          div.form-group
+              label.bathAttr(for='cost') bath cost
+              input#cost(type='number', name='cost', value= cost )
+          input(type="submit")
+
+        script.
+          document.forms['bathForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(event.target.action, {
+              method: 'PUT',
+              body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            }).then((resp) => {
+              return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+              alert("Update succeded")
+              // TODO handle body
+            }).catch((error) => {
+              // TODO handle error
+              alert("Update failed " + error )
+            });
+          });

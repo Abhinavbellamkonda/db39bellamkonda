@@ -1,14 +1,20 @@
-extends layout
-
 block content
   h1= title
-  //- let Bath_essentials = ['Bath_tub_Type','Bath_Towel_Type','Cost']
-  - let Bath_essentials = results;
-  script.
-    function buy(x){
-      alert('Purchased Item: ' + x)
-   } 
-  div(class='container-fluid')
-    div(class='row')
-      each results, index in Bath_essentials
-        div(class='col-sm-2' onclick='buy('+index+')') #{results}
+
+  - let items = results; 
+  div(class="container-fluid") 
+    div(class="row m-1") 
+      each item in items  
+        - let destination = `dispatch(\"/bath/update?id=${item._id}\")` 
+        - let destination1 = `dispatch(\"/bath/create\")`
+        - let destination2 = `dispatch(\"/bath/detail?id=${item._id}\")`
+        - let destination3 = `dispatch(\"/bath/delete?id=${item._id}\")`
+        div(class="row-sm-2" class="m-1") Item #{item.bath_type}(#{item.bath_towel_type}) is #{item.cost} 
+          button.btn( class="btn-primary ml-1", onclick= destination1, style = "margin:5px;") Create
+          button.btn( class="btn-primary ml-1", onclick= destination, style = "margin:5px;" ) Update 
+          button.btn( class="btn-primary ml-1", onclick= destination2, style = "margin:5px;" ) Detail
+          button.btn( class="btn-primary ml-1", onclick= destination3, style = "margin:5px;" ) Delete
+script. 
+  function dispatch(path){ 
+    window.location.href=path 
+  }

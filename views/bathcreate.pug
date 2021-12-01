@@ -1,0 +1,36 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='bathForm', action="/resource/bath", method="POST") 
+    div.form-group 
+        label.bathAttr(for='bath_type') bath type:  
+        input#bath_type(type='text', name='bath_type') 
+    div.form-group 
+        label.bathAttr(for='bath_towel_type') bath duration:  
+        input#bath_towel_type(type='text', name='bath_towel_type') 
+    div.form-group 
+        label.bathAttr(for='cost') bath cost:  
+        input#cost(type='number', name='cost') 
+    input(type="submit") 
+
+    button(class="btn btn-secondary m-2" onclick="window.location.href='/bath'") Cancel 
+ 
+  script. 
+    document.forms['bathForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 

@@ -13,7 +13,7 @@ router.get('/resource', api_controller.api);
 /// bath ROUTES /// 
  
 // POST request for creating a bath.  
-router.post('/resource/bath', bath_controller.bath_create_post); 
+router.post('/bath', bath_controller.bath_create_post); 
  
 // DELETE request to delete bath. 
 router.delete('/resource/bath/:id', bath_controller.bath_delete); 
@@ -26,6 +26,6 @@ bath_controller.bath_update_put);
 router.get('/resource/bath/:id', bath_controller.bath_detail); 
  
 // GET request for list of all bath items. 
-router.get('/resource/bath', bath_controller.bath_list); 
+router.get('/resource/bath', bath_controller.bath_view_all_Page); 
  
 module.exports = router; 

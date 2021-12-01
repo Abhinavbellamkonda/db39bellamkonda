@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1(id='bathtitle')= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+      - let bathid = toShow._id
+      - let bath_type = toShow.bath_type
+      - let bath_towel_type = toShow.bath_towel_type
+      - let cost = toShow.cost
+      div
+        div.row
+          div(class='bathAttr mr-3') bath ID is:
+          div(class='bathvalues') #{bathid}
+        div.row
+          div(class='bathAttr mr-3') bath_type is:
+          div(class="bathvalues") #{bath_type}
+        div.row
+          div(class='bathAttr mr-3') bath_towel_type is:
+          div(class="bathvalues") #{bath_towel_type}
+        div.row
+          div(class='bathAttr mr-3') cost is:
+          div(class="bathvalues") #{cost}
+
+

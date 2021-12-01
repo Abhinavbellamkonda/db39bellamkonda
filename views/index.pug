@@ -1,15 +1,12 @@
-extends layout
+extends layout 
 
-block content
-  h1= title
-  p Bellamkonda Assignment 10 Webapps
-  button(type='button',onclick='update()',class='btn btn-primary') Hit Harder!
-  
-  div(id="target") text of Display 
-
-  script.
-    var client_count = 0;
-    function update(){
-      client_count +=1;
-      document.getElementById("target").innerHTML = "Value now " + client_count;
-    }
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register 
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/resource/bath") Take me to bath
+    br 
+    a(href="/logout") Logout 
